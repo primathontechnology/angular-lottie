@@ -6,5 +6,18 @@
 */
 {
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./projects/angular-lottie/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/angular-lottie/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/tester/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/tester/tsconfig.spec.json"
+    }
+]
 }
