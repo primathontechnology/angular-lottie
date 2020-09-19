@@ -1,27 +1,48 @@
-# Lottie
+# ![primathon logo](https://primathon.in/assets/img/logo-primathon.png) Lottie Animation Using Directive for Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.14.
 
-## Development server
+<br/>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Install
 
-## Code scaffolding
+```
+npm i angular-lottie
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+1. Install [Angular Lottie](https://www.npmjs.com/package/angular-lottie) into your project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    > npm i angular-lottie
 
-## Running unit tests
+1. Import `AngularLottieModule` inside your AppModule (`src/app/app.module.ts`)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Store Your Lottie Json Data in to a variable
 
-## Running end-to-end tests
+    > const lottieJsonData = { v: '5.5.7', meta: { ... } }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Examples
 
-## Further help
+Apply Lottie Animation by adding directive:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```html
+<section [angularLottie]="lottieJsonData"></section>
+```
+
+`or`
+
+```html
+<section
+    [angularLottie]="lottieJsonData"
+    [loop]="true / false / number"
+></section>
+```
+
+## Demo
+
+Demo url https://primathontech.github.io/angular-lottie/
+
+## See also
+
+Other [Web APIs for Angular](https://primathontech.github.io/) by [@primathontech](https://github.com/primathontech)

@@ -8,7 +8,8 @@ interface ScriptsInterface {
 const ScriptStore: ScriptsInterface[] = [
     {
         name: 'lottie',
-        src: 'https://d1shyureub17fu.cloudfront.net/lottie/lottie.js',
+        src:
+            'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.3/lottie.min.js',
         async: false,
         defer: true,
     },

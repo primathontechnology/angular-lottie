@@ -19,7 +19,11 @@ import { Subscription } from 'rxjs';
 })
 export class AngularLottieDirective implements AfterViewInit, OnDestroy {
     @Input() angularLottie: any;
-    @Input() allowLooping: boolean = true;
+    // loop : true / false / number
+    @Input() loop: any = true;
+    // autoplay: true / false it will start playing as soon as it is ready
+    @Input() autoPlay: any = true;
+
     private readonly scriptName = 'lottie';
 
     private sub$: Subscription;
@@ -62,18 +66,13 @@ export class AngularLottieDirective implements AfterViewInit, OnDestroy {
     private getLottieScript() {
         const myId = uuidv4();
         this.renderer.setAttribute(this.element.nativeElement, 'id', myId);
-        const lottieString = `var params = {
+        return `lottie.loadAnimation({
             container: document.getElementById('${myId}'),
             renderer: 'svg',
-            loop: ${this.allowLooping},
-            autoplay: true,
+            loop: ${this.loop},
+            autoplay: ${this.autoPlay},
             animationData: ${JSON.stringify(this.angularLottie)},
-        };
-
-        var anim;
-        anim = lottie.loadAnimation(params);`;
-
-        return lottieString;
+        });`;
     }
 
     ngOnDestroy(): void {

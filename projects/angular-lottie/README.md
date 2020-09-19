@@ -1,24 +1,48 @@
-# AngularLottie
+# ![primathon logo](https://primathon.in/assets/img/logo-primathon.png) Lottie Animation Using Directive for Angular
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.14.
 
-## Code scaffolding
+<br/>
 
-Run `ng generate component component-name --project angular-lottie` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-lottie`.
-> Note: Don't forget to add `--project angular-lottie` or else it will be added to the default project in your `angular.json` file. 
+## Install
 
-## Build
+```
+npm i angular-lottie
+```
 
-Run `ng build angular-lottie` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Publishing
+1. Install [Angular Lottie](https://www.npmjs.com/package/angular-lottie) into your project
 
-After building your library with `ng build angular-lottie`, go to the dist folder `cd dist/angular-lottie` and run `npm publish`.
+    > npm i angular-lottie
 
-## Running unit tests
+1. Import `AngularLottieModule` inside your AppModule (`src/app/app.module.ts`)
 
-Run `ng test angular-lottie` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Store Your Lottie Json Data in to a variable
 
-## Further help
+    > const lottieJsonData = { v: '5.5.7', meta: { ... } }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Examples
+
+Apply Lottie Animation by adding directive:
+
+```html
+<section [angularLottie]="lottieJsonData"></section>
+```
+
+`or`
+
+```html
+<section
+    [angularLottie]="lottieJsonData"
+    [loop]="true / false / number"
+></section>
+```
+
+## Demo
+
+Demo url https://primathontech.github.io/angular-lottie/
+
+## See also
+
+Other [Web APIs for Angular](https://primathontech.github.io/) by [@primathontech](https://github.com/primathontech)
