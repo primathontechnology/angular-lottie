@@ -6,17 +6,23 @@ import {
     ElementRef,
     Inject,
     Input,
+    OnDestroy,
     PLATFORM_ID,
     Renderer2,
 } from '@angular/core';
 
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Directive({
     selector: '[angularLottie]',
 })
-export class AngularLottieDirective implements AfterViewInit {
+export class AngularLottieDirective implements AfterViewInit, OnDestroy {
     @Input() angularLottie: any;
+    @Input() allowLooping: boolean = true;
+    private readonly scriptName = 'lottie';
+
+    private sub$: Subscription;
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,
@@ -26,18 +32,23 @@ export class AngularLottieDirective implements AfterViewInit {
     ) {}
 
     ngAfterViewInit(): void {
-        this.initLottie();
+        if (isPlatformBrowser(this.platformId) && this.angularLottie) {
+            this.sub$ = this.scriptLoaderService
+                .onLoad()
+                .subscribe((loaded: boolean) => {
+                    if (loaded) {
+                        const scriptText = this.getLottieScript();
+                        this.addScriptToBody(scriptText);
+                    } else {
+                        this.initLottie();
+                    }
+                });
+        }
     }
 
     private initLottie() {
         if (isPlatformBrowser(this.platformId)) {
-            this.scriptLoaderService.loadScript().then((data: any) => {
-                console.log(data);
-                if (data.loaded) {
-                    const scriptText = this.getLottieScript();
-                    this.addScriptToBody(scriptText);
-                }
-            });
+            this.scriptLoaderService.loadScript(this.scriptName);
         }
     }
 
@@ -54,7 +65,7 @@ export class AngularLottieDirective implements AfterViewInit {
         const lottieString = `var params = {
             container: document.getElementById('${myId}'),
             renderer: 'svg',
-            loop: true,
+            loop: ${this.allowLooping},
             autoplay: true,
             animationData: ${JSON.stringify(this.angularLottie)},
         };
@@ -63,5 +74,11 @@ export class AngularLottieDirective implements AfterViewInit {
         anim = lottie.loadAnimation(params);`;
 
         return lottieString;
+    }
+
+    ngOnDestroy(): void {
+        if (this.sub$) {
+            this.sub$.unsubscribe();
+        }
     }
 }
